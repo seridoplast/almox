@@ -237,7 +237,7 @@
      </button>
     </form>
     <div class="auth-foot">
-     SERIDOPLAST • Versão 6.7 Online
+     SERIDOPLAST • Versão 6.9 Online
     </div>
    </div>
   </div>
@@ -281,6 +281,13 @@
        </use>
       </svg>
       Devolução
+     </button>
+     <button data-view="emprestimos">
+      <svg class="ico">
+       <use href="#i-check">
+       </use>
+      </svg>
+      Empréstimos
      </button>
      <button data-view="estoque">
       <svg class="ico">
@@ -401,22 +408,6 @@
       </kbd>
      </div>
      <div class="tb-r">
-      <span class="it">
-       <svg class="ico">
-        <use href="#i-calendar">
-        </use>
-       </svg>
-       <span id="spDate">
-       </span>
-      </span>
-      <span class="it">
-       <svg class="ico">
-        <use href="#i-clock">
-        </use>
-       </svg>
-       <span id="spClock">
-       </span>
-      </span>
       <button aria-label="Alertas" class="bell" onclick="go('dashboard');document.getElementById('alertas').scrollIntoView({behavior:'smooth',block:'center'})">
        <svg class="ico">
         <use href="#i-bell">
@@ -444,37 +435,6 @@
         <use href="#i-chevd">
         </use>
        </svg>
-      </div>
-     </div>
-    </div>
-    <div class="sp-banner" id="spHero">
-     <div class="sp-banner-content">
-      <div>
-       <h2>
-        Organização hoje,
-        <br/>
-        mais
-        <span>
-         eficiência
-        </span>
-        sempre.
-       </h2>
-       <p>
-        Controle de materiais de forma simples e segura.
-       </p>
-      </div>
-      <div class="brandmark">
-       <img alt="Seridoplast" src="assets/images/imagem_embutida_1.jpg"/>
-       <div class="slogan">
-        Acreditamos
-        <br/>
-        na
-        <span>
-         força
-        </span>
-        <br/>
-        do trabalho.
-       </div>
       </div>
      </div>
     </div>
@@ -633,6 +593,16 @@
         <use href="#i-chev">
         </use>
        </svg>
+      </button>
+      <button class="act a4" onclick="go('emprestimos')">
+       <span class="aic">
+        <svg class="ico"><use href="#i-check"></use></svg>
+       </span>
+       <div>
+        <b>EMPRÉSTIMOS</b>
+        <small>Controle de empréstimos</small>
+       </div>
+       <svg class="ico"><use href="#i-chev"></use></svg>
       </button>
      </div>
      <div class="row2">
@@ -847,6 +817,26 @@
       </div>
      </div>
      <div class="panel" id="devolucaoForm">
+     </div>
+    </section>
+    <section class="view" id="emprestimos">
+     <div class="top">
+      <div>
+       <h1>Empréstimos</h1>
+       <div class="sub">Controle de materiais retirados temporariamente por funcionários</div>
+      </div>
+     </div>
+     <div class="cards" style="margin-bottom:14px">
+      <div class="card"><div class="label">EMPRÉSTIMOS EM ABERTO</div><div class="metric" id="empAbertos">0</div></div>
+      <div class="card"><div class="label">ATRASADOS</div><div class="metric" id="empAtrasados">0</div></div>
+     </div>
+     <div class="panel"><h3>Novo empréstimo</h3><div id="emprestimoForm"></div></div>
+     <div class="panel" style="margin-top:14px">
+      <div class="toolbar"><div class="left">
+       <button class="btn secondary" onclick="empFiltro='ABERTO';renderEmprestimos()">Em aberto</button>
+       <button class="btn secondary" onclick="empFiltro='TODOS';renderEmprestimos()">Todos</button>
+      </div></div>
+      <div id="tblEmprestimos"></div>
      </div>
     </section>
     <section class="view" id="estoque">

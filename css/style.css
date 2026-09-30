@@ -1612,3 +1612,40 @@ body.locked #auth {
     display:none!important;
     content:none!important
 }
+
+
+/* ===== TEMA ESCURO SERIDOPLAST V7 ===== */
+:root{
+  --bg:#11161d;--card:#18202a;--card2:#1d2631;--text:#f2f4f7;--muted:#98a2b3;
+  --line:#2b3542;--soft:#242e3a;--red:#d94b55;--yellow:#d2aa45;--green:#45b982;
+  --r:#d94b55;--r2:#b43b44;--y:#d2aa45;--g:#45b982
+}
+html,body{background:var(--bg)!important;color:var(--text)!important}
+.app{background:var(--bg)!important;grid-template-columns:230px minmax(0,1fr)!important}
+.side{background:#151c24!important;border-right:1px solid var(--line)!important}
+.brand{background:#151c24!important;border-bottom:1px solid var(--line)!important;padding:20px 0 18px!important}
+.brand img{width:112px!important;height:112px!important;border:2px solid #d7dde5!important}
+nav{padding:14px 12px!important}
+nav button{color:#b9c2cf!important;padding:11px 13px!important}
+nav button:hover{background:#202a36!important;color:#fff!important}
+nav button.active{background:#2a3441!important;color:#fff!important;box-shadow:inset 3px 0 0 #98a2b3!important}
+.side-foot{background:#151c24!important;padding:22px 12px 12px!important;border-top:1px solid var(--line)!important}
+.side-foot:before{display:none!important}.cd{color:#cbd3dd!important}.logout{background:#202832!important;border:1px solid var(--line)!important;color:#cbd3dd!important}
+.topbar{background:#151c24!important;border-bottom:1px solid var(--line)!important;color:#fff!important;margin-bottom:22px!important;box-shadow:none!important}
+.search input,input,select,textarea{background:#111820!important;border:1px solid #313c49!important;color:#edf1f5!important}
+.search input::placeholder,input::placeholder,textarea::placeholder{color:#748091!important}.search kbd{background:#202832!important;border-color:#394554!important;color:#9ba6b5!important}
+.bell{color:#aeb8c5!important}.usr .av{background:#27313e!important;color:#c7d0db!important}.usr{background:#1c242e;padding:7px 10px;border:1px solid #283340;border-radius:10px}
+.sp-banner{display:none!important}
+.main>section,.main>.foot{margin-left:28px!important;margin-right:28px!important}
+.kpis{gap:16px!important}.kpi{height:116px!important;background:#19222c!important;border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:none!important}
+.kpi b{color:#f7f8fa!important}.kpi small{color:#98a2b3!important}.kpi .kl{color:#aab4c1!important}.kpi .deco{opacity:.08!important}
+.k1,.k2,.k3,.k4{background:#19222c!important}.k1 .kic{background:#243447!important;color:#79b8f3!important}.k2 .kic{background:#1d3a31!important;color:#61d39c!important}.k3 .kic{background:#3b3320!important;color:#d7aa43!important}.k4 .kic{background:#3c292e!important;color:#e36b76!important}
+.k3 .kic .ico{width:30px!important;height:30px!important;fill:none!important;stroke:currentColor!important}.k1 .kl,.k2 .kl,.k3 .kl,.k4 .kl{color:#aab4c1!important}
+.acts{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin-top:16px!important}.act,.a1,.a2,.a3,.a4{height:82px!important;background:#202a36!important;color:#edf1f5!important;border:1px solid #303b49!important;border-radius:11px!important;transition:.15s ease!important}.act:hover{background:#273240!important;border-color:#435063!important;transform:translateY(-1px)}.act .aic,.a1 .aic,.a2 .aic,.a3 .aic,.a4 .aic{width:48px!important;height:48px!important;background:#2b3644!important;color:#cbd4df!important}.act .aic .ico{width:27px!important;height:27px!important}.act b,.a3 b{font-size:14px!important;color:#f2f4f7!important}.act small{font-size:12px!important;color:#9ca7b5!important}
+.pn,.panel,.card{background:#18202a!important;border:1px solid var(--line)!important;box-shadow:none!important;color:var(--text)!important}.ph{border-color:var(--line)!important}.ph h3{color:#f3f5f7!important}.vt,.secondary{background:#222c38!important;color:#c7d0db!important;border-color:#354150!important}
+table,thead,tbody,tr,td,th{border-color:#2b3542!important}thead th{background:#222c38!important;color:#aab4c1!important}tbody tr{background:#18202a!important;color:#dce2e8!important}tbody tr:hover{background:#202a35!important}
+.label,.sub,.hint,.auth-foot{color:#98a2b3!important}.metric,h1,h2,h3{color:#f5f7fa!important}
+.btn.primary,.primary{background:#394655!important;color:#fff!important}.btn.primary:hover,.primary:hover{background:#465466!important}.danger{background:#3a2529!important;color:#f08a93!important}
+#auth{background:#10151c!important}.auth-box{background:#18202a!important;border:1px solid var(--line)!important;box-shadow:0 20px 60px #0008!important}.auth-logo{border:2px solid #d8dde5!important}
+@media(max-width:1100px){.acts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:700px){.acts{grid-template-columns:1fr!important}.main>section,.main>.foot{margin-left:14px!important;margin-right:14px!important}}

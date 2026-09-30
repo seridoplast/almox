@@ -1,6 +1,6 @@
 /*
 ===============================================================================
-SERIDOPLAST - ALMOXARIFADO INTERNO V6.7
+SERIDOPLAST - ALMOXARIFADO INTERNO V6.9
 ===============================================================================
 
 Este arquivo concentra a lógica do sistema original.
@@ -26,7 +26,8 @@ está sendo usado.
 const SUPABASE_URL='https://pwvycpozttrqrvpklhib.supabase.co';
 const SUPABASE_KEY='sb_publishable_y18Eh6bX8U06BQUd0WZwRA_11nhKfg-';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-let db={materiais:[],mov:[],setores:[]};
+let db={materiais:[],mov:[],setores:[],emprestimos:[]};
+let empFiltro='ABERTO';
 let cur=null;
 let users=[];
 let realtimeChannel=null;
@@ -37,7 +38,11 @@ const today=()=>new Date().toISOString().slice(0,10);
 function nextMov(){let n=(db.seq||0)+1;db.seq=n;return 'MOV-'+String(n).padStart(6,'0')}
 function agora(){return new Date().toLocaleString('pt-BR')}
 const fmt=d=>new Date(d+'T12:00:00').toLocaleDateString('pt-BR');
-function saldo(id){return db.mov.filter(x=>x.materialId===id).reduce((a,x)=>a+((x.tipo==='ENTRADA'||x.tipo==='DEVOLUCAO')?x.qtd:x.tipo==='SAIDA'?-x.qtd:x.qtd),0)}
+function saldo(id){
+ const mov=db.mov.filter(x=>x.materialId===id).reduce((a,x)=>a+((x.tipo==='ENTRADA'||x.tipo==='DEVOLUCAO')?x.qtd:x.tipo==='SAIDA'?-x.qtd:x.qtd),0);
+ const emprestado=db.emprestimos.filter(x=>x.materialId===id&&x.status==='ABERTO').reduce((a,x)=>a+x.qtd,0);
+ return mov-emprestado;
+}
 function mat(id){return db.materiais.find(x=>x.id===id)}
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active');let h=document.getElementById('spHero');if(h)h.style.display=b.dataset.view==='dashboard'?'block':'none';renderAll()});
 function openMaterial(id=''){let m=id?mat(id):null;editId.value=m?.id||'';codigo.value=m?.codigo||'';descricao.value=m?.descricao||'';categoria.value=m?.categoria||'';unidade.value=m?.unidade||'UN';localizacao.value=m?.localizacao||'';minimo.value=m?.minimo??0;obs.value=m?.obs||m?.observacao||'';modalTitle.textContent=m?'Editar material':'Novo material';modal.classList.add('open')}
@@ -80,6 +85,51 @@ async function devolucao(e){
  const r=await sb.from('movimentacoes').insert({tipo:'DEVOLUCAO',material_id:f.material.value,quantidade:q,data_movimento:f.data.value,setor:f.setor.value||null,recebeu:f.recebeu.value||null,responsavel:f.responsavel.value||null,observacao:f.obs.value||null,usuario_id:cur.id});
  if(r.error)return alert('Erro ao registrar devolução: '+r.error.message);f.reset();await loadData();alert('Devolução registrada com sucesso.');
 }
+function renderEmprestimoForm(){
+ const el=document.getElementById('emprestimoForm');if(!el)return;
+ el.innerHTML=`<form class="formgrid" onsubmit="registrarEmprestimo(event)">
+ <div class="field"><label>Material *</label><select name="material" required>${options()}</select></div>
+ <div class="field"><label>Quantidade *</label><input name="qtd" type="number" min="0.001" step="0.001" required></div>
+ <div class="field"><label>Funcionário *</label><input name="funcionario" required></div>
+ <div class="field"><label>Setor *</label><input name="setor" list="listaSetoresEmp" required><datalist id="listaSetoresEmp">${db.setores.map(s=>`<option>${esc(s)}</option>`).join('')}</datalist></div>
+ <div class="field"><label>Data da retirada *</label><input name="data" type="date" value="${today()}" required></div>
+ <div class="field"><label>Previsão de devolução</label><input name="previsao" type="date"></div>
+ <div class="field wide"><label>Observação</label><textarea name="obs"></textarea></div>
+ <div class="wide"><button class="btn primary">Registrar empréstimo</button></div></form>`;
+}
+async function registrarEmprestimo(e){
+ e.preventDefault();const f=e.target,id=f.material.value,q=Number(f.qtd.value);
+ if(q<=0)return alert('Informe uma quantidade válida.');
+ if(q>saldo(id))return alert('Quantidade maior que o estoque disponível.');
+ const obj={material_id:id,quantidade:q,funcionario:f.funcionario.value.trim(),setor:f.setor.value,data_retirada:f.data.value,previsao_devolucao:f.previsao.value||null,observacao:f.obs.value.trim()||null,status:'ABERTO',criado_por:cur.id};
+ const r=await sb.from('emprestimos').insert(obj);
+ if(r.error)return alert('Erro ao registrar empréstimo: '+r.error.message);
+ f.reset();await loadData();alert('Empréstimo registrado com sucesso.');
+}
+async function devolverEmprestimo(id){
+ const e=db.emprestimos.find(x=>x.id===id);if(!e)return;
+ if(!confirm(`Confirmar devolução de ${e.qtd} ${mat(e.materialId)?.unidade||''} de "${mat(e.materialId)?.descricao||'material'}" por ${e.funcionario}?`))return;
+ const r=await sb.from('emprestimos').update({status:'DEVOLVIDO',data_devolucao:today(),recebido_por:cur.id}).eq('id',id).eq('status','ABERTO');
+ if(r.error)return alert('Erro ao registrar devolução: '+r.error.message);
+ await loadData();alert('Devolução do empréstimo registrada.');
+}
+function renderEmprestimos(){
+ renderEmprestimoForm();
+ const el=document.getElementById('tblEmprestimos');if(!el)return;
+ const hoje=today();
+ const abertos=db.emprestimos.filter(x=>x.status==='ABERTO');
+ const atrasados=abertos.filter(x=>x.previsao&&x.previsao<hoje);
+ const ea=document.getElementById('empAbertos'),er=document.getElementById('empAtrasados');
+ if(ea)ea.textContent=abertos.length;if(er)er.textContent=atrasados.length;
+ let arr=[...db.emprestimos].sort((a,b)=>(b.dataRetirada+b.criadoEm).localeCompare(a.dataRetirada+a.criadoEm));
+ if(empFiltro==='ABERTO')arr=arr.filter(x=>x.status==='ABERTO');
+ el.innerHTML=arr.length?`<table><thead><tr><th>Material</th><th>Qtd.</th><th>Funcionário</th><th>Setor</th><th>Retirada</th><th>Previsão</th><th>Status</th><th>Ação</th></tr></thead><tbody>${arr.map(x=>{
+   const atraso=x.status==='ABERTO'&&x.previsao&&x.previsao<hoje;
+   const status=x.status==='DEVOLVIDO'?'Devolvido':atraso?'Atrasado':'Em aberto';
+   const cls=x.status==='DEVOLVIDO'?'':atraso?'zero':'low';
+   return `<tr><td><b>${esc(mat(x.materialId)?.descricao||'Material removido')}</b></td><td>${x.qtd}</td><td>${esc(x.funcionario)}</td><td>${esc(x.setor)}</td><td>${fmt(x.dataRetirada)}</td><td>${x.previsao?fmt(x.previsao):'-'}</td><td><span class="badge ${cls}">${status}</span></td><td>${x.status==='ABERTO'?`<button class="btn primary" onclick="devolverEmprestimo('${x.id}')">Devolver</button>`:`${x.dataDevolucao?fmt(x.dataDevolucao):'-'}`}</td></tr>`;
+ }).join('')}</tbody></table>`:'<div class="notice">Nenhum empréstimo encontrado.</div>';
+}
 function renderMateriais(){let q=(busca?.value||'').toLowerCase(),arr=db.materiais.filter(m=>(m.codigo+' '+m.descricao).toLowerCase().includes(q));tblMateriais.innerHTML=arr.length?`<table><thead><tr><th>Código</th><th>Material</th><th>Categoria</th><th>Local</th><th>Saldo</th><th>Mínimo</th><th>Ações</th></tr></thead><tbody>${arr.map(m=>{let s=saldo(m.id),c=s===0?'zero':s<=m.minimo?'low':'';return `<tr><td>${esc(m.codigo)}</td><td><b>${esc(m.descricao)}</b><br><span class="label">${esc(m.unidade)}</span></td><td>${esc(m.categoria)}</td><td>${esc(m.localizacao)}</td><td><span class="badge ${c}">${s}</span></td><td>${m.minimo}</td><td><button class="btn secondary" onclick="openMaterial('${m.id}')">Editar</button> <button class="btn danger" onclick="delMaterial('${m.id}')">Excluir</button></td></tr>`}).join('')}</tbody></table>`:'<div class="notice">Nenhum material cadastrado.</div>'}
 function renderMov(){let a=[...db.mov].sort((x,y)=>(y.data+y.id).localeCompare(x.data+x.id));tblMov.innerHTML=a.length?`<table><thead><tr><th>Movimentação</th><th>Data</th><th>Tipo</th><th>Material</th><th>Qtd.</th><th>Destino/Origem</th><th>Responsável</th></tr></thead><tbody>${a.map(x=>`<tr><td><b>${esc(x.numero||'-')}</b></td><td>${fmt(x.data)}</td><td><span class="badge ${x.tipo==='SAIDA'?'low':''}">${x.tipo}</span></td><td>${esc(mat(x.materialId)?.descricao||'Material removido')}</td><td>${x.tipo==='SAIDA'?'-':(x.tipo==='ENTRADA'||x.tipo==='DEVOLUCAO')?'+':''}${x.qtd}</td><td>${esc(x.setor||x.origem||'-')}</td><td>${esc(x.recebeu||x.responsavel||'-')}</td></tr>`).join('')}</tbody></table>`:'<div class="notice">Ainda não existem movimentações.</div>'}
 function renderInv(){tblInv.innerHTML=db.materiais.length?`<table><thead><tr><th>Material</th><th>Saldo sistema</th><th>Qtd. física</th><th></th></tr></thead><tbody>${db.materiais.map(m=>`<tr><td>${esc(m.codigo)} - ${esc(m.descricao)}</td><td>${saldo(m.id)}</td><td><input id="inv_${m.id}" type="number" min="0" step="0.001" style="max-width:130px"></td><td><button class="btn primary" onclick="ajustar('${m.id}')">Conferir</button></td></tr>`).join('')}</tbody></table>`:'<div class="notice">Cadastre materiais primeiro.</div>'}
@@ -108,7 +158,7 @@ function renderReports(){let ent=db.mov.filter(x=>x.tipo==='ENTRADA').reduce((a,
 function exportar(){let b=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='backup_almox_control_'+today()+'.json';a.click();URL.revokeObjectURL(a.href)}
 function importar(){alert('Na versão Online, a importação direta de backup está desativada para proteger o banco compartilhado.');}
 function limpar(){alert('Na versão Online, os dados compartilhados não podem ser apagados pelo navegador.');}
-function renderAll(){renderForms();renderMateriais();renderMov();renderInv();renderDash();renderReports();renderV53();renderEstoque();renderUsers();updateProfessionalUI()}
+function renderAll(){renderForms();renderMateriais();renderMov();renderInv();renderDash();renderReports();renderV53();renderEstoque();renderEmprestimos();renderUsers();updateProfessionalUI()}
 function updateHeaderClock(){
  const now=new Date();
  const date=document.getElementById('spDate'), clock=document.getElementById('spClock');
@@ -160,16 +210,18 @@ function applyUser(){
  document.querySelectorAll('[data-admin]').forEach(b=>b.style.display=isAdmin()?'':'none');
 }
 async function loadData(){
- const [rm,rv,rs]=await Promise.all([
+ const [rm,rv,rs,re]=await Promise.all([
    sb.from('materiais').select('*').eq('ativo',true).order('descricao'),
    sb.from('movimentacoes').select('*').order('criado_em',{ascending:false}),
-   sb.from('setores').select('*').eq('ativo',true).order('nome')
+   sb.from('setores').select('*').eq('ativo',true).order('nome'),
+   sb.from('emprestimos').select('*').order('criado_em',{ascending:false})
  ]);
- const err=rm.error||rv.error||rs.error;
+ const err=rm.error||rv.error||rs.error||re.error;
  if(err){console.error(err);alert('Falha ao carregar dados do servidor: '+err.message);return}
  db.materiais=(rm.data||[]).map(m=>({...m,obs:m.observacao||''}));
  db.mov=(rv.data||[]).map(x=>({id:x.id,numero:'MOV-'+String(x.numero).padStart(6,'0'),hora:new Date(x.criado_em).toLocaleString('pt-BR'),tipo:x.tipo,materialId:x.material_id,qtd:Number(x.quantidade),data:x.data_movimento,setor:x.setor||'',origem:x.origem||'',doc:x.documento||'',recebeu:x.recebeu||'',responsavel:x.responsavel||'',obs:x.observacao||''}));
  db.setores=(rs.data||[]).map(x=>x.nome);
+ db.emprestimos=(re.data||[]).map(x=>({id:x.id,materialId:x.material_id,qtd:Number(x.quantidade),funcionario:x.funcionario,setor:x.setor||'',dataRetirada:x.data_retirada,previsao:x.previsao_devolucao||'',status:x.status,dataDevolucao:x.data_devolucao||'',observacao:x.observacao||'',criadoEm:x.criado_em||''}));
  renderAll();
 }
 async function loadProfile(user){
@@ -200,6 +252,7 @@ function subscribeRealtime(){
  .on('postgres_changes',{event:'*',schema:'public',table:'materiais'},()=>loadData())
  .on('postgres_changes',{event:'*',schema:'public',table:'movimentacoes'},()=>loadData())
  .on('postgres_changes',{event:'*',schema:'public',table:'setores'},()=>loadData())
+ .on('postgres_changes',{event:'*',schema:'public',table:'emprestimos'},()=>loadData())
  .subscribe();
 }
 async function renderUsers(){
