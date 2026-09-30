@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   SERIDOPLAST | Almoxarifado Interno
+  </title>
+  <link href="css/style.css" rel="stylesheet"/>
+ </head>
+ <body class="locked">
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+   <defs>
+    <symbol id="i-home" viewbox="0 0 24 24">
+     <path d="M3 11.5 12 4l9 7.5v8a1.5 1.5 0 0 1-1.5 1.5h-5v-6h-5v6h-5A1.5 1.5 0 0 1 3 19.5z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-box" viewbox="0 0 24 24">
+     <path d="m4 7 8-4 8 4-8 4zM4 7v10l8 4 8-4V7M12 11v10" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-down" viewbox="0 0 24 24">
+     <path d="M12 3v14m-6-6 6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4">
+     </path>
+    </symbol>
+    <symbol id="i-up" viewbox="0 0 24 24">
+     <path d="M12 21V7m-6 6 6-6 6 6M5 3h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4">
+     </path>
+    </symbol>
+    <symbol id="i-return" viewbox="0 0 24 24">
+     <path d="M9 7H4v-5M4.5 7.5A9 9 0 1 1 3 15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3">
+     </path>
+    </symbol>
+    <symbol id="i-list" viewbox="0 0 24 24">
+     <path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2">
+     </path>
+    </symbol>
+    <symbol id="i-check" viewbox="0 0 24 24">
+     <path d="M4 12.5 9 18 20 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+     </path>
+    </symbol>
+    <symbol id="i-chart" viewbox="0 0 24 24">
+     <path d="M4 20V10h4v10M10 20V4h4v16M16 20v-7h4v7" fill="none" stroke="currentColor" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-gear" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="none" r="3" stroke="currentColor" stroke-width="2">
+     </circle>
+     <path d="M19 13.5v-3l-2-.7-.7-1.7.9-1.9-2.1-2.1-1.9.9-1.7-.7L10.5 2h-3l-.7 2.3-1.7.7-1.9-.9L1.1 6.2 2 8.1l-.7 1.7L0 10.5v3l2.3.7.7 1.7-.9 1.9 2.1 2.1 1.9-.9 1.7.7.7 2.3h3l.7-2.3 1.7-.7 1.9.9 2.1-2.1-.9-1.9.7-1.7z" fill="none" stroke="currentColor" stroke-width="1.5" transform="translate(2)">
+     </path>
+    </symbol>
+    <symbol id="i-alert" viewbox="0 0 24 24">
+     <path d="M12 3 2.5 20h19z" fill="none" stroke="currentColor" stroke-width="2">
+     </path>
+     <path d="M12 9v5m0 3v.1" stroke="currentColor" stroke-linecap="round" stroke-width="2.3">
+     </path>
+    </symbol>
+    <symbol id="i-x" viewbox="0 0 24 24">
+     <path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.7">
+     </path>
+    </symbol>
+    <symbol id="i-calendar" viewbox="0 0 24 24">
+     <rect fill="none" height="16" rx="2" stroke="currentColor" stroke-width="2" width="18" x="3" y="5">
+     </rect>
+     <path d="M7 3v4m10-4v4M3 10h18m-13 4h3m2 0h3m-8 3h3" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-clock" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="none" r="9" stroke="currentColor" stroke-width="2">
+     </circle>
+     <path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-user" viewbox="0 0 24 24">
+     <circle cx="12" cy="8" fill="none" r="4" stroke="currentColor" stroke-width="2">
+     </circle>
+     <path d="M4 21c.7-4 3.4-6 8-6s7.3 2 8 6" fill="none" stroke="currentColor" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-bell" viewbox="0 0 24 24">
+     <path d="M5 17h14l-2-3v-4a5 5 0 0 0-10 0v4zM10 20h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-file" viewbox="0 0 24 24">
+     <path d="M6 3h8l4 4v14H6zM14 3v5h5M9 13h6m-6 4h6" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-cloud" viewbox="0 0 24 24">
+     <path d="M7 18H5a4 4 0 0 1 0-8h1a6 6 0 0 1 11.5-1.8A5 5 0 0 1 18 18h-2M12 20v-8m-3 3 3-3 3 3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-menu" viewbox="0 0 24 24">
+     <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4">
+     </path>
+    </symbol>
+    <symbol id="i-search" viewbox="0 0 24 24">
+     <circle cx="10.5" cy="10.5" fill="none" r="6.5" stroke="currentColor" stroke-width="2">
+     </circle>
+     <path d="m15.5 15.5 5 5" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-chev" viewbox="0 0 24 24">
+     <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
+     </path>
+    </symbol>
+    <symbol id="i-chevd" viewbox="0 0 24 24">
+     <path d="m5 9 7 7 7-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
+     </path>
+    </symbol>
+    <symbol id="i-users" viewbox="0 0 24 24">
+     <circle cx="9" cy="8" fill="none" r="3.5" stroke="currentColor" stroke-width="2">
+     </circle>
+     <path d="M2.5 20c.6-3.6 3-5.5 6.5-5.5s5.900 1.900 6.500 5.500M16 4.800a3.400 3.400 0 0 1 0 6.400M18 14.800c2 .6 3.200 2.300 3.500 5.200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-pie" viewbox="0 0 24 24">
+     <path d="M12 3a9 9 0 1 0 9 9h-9z" fill="currentColor">
+     </path>
+     <path d="M14 2.200A9 9 0 0 1 21.800 10H14z" fill="currentColor">
+     </path>
+    </symbol>
+    <symbol id="i-bolt" viewbox="0 0 24 24">
+     <path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor">
+     </path>
+    </symbol>
+    <symbol id="i-logout" viewbox="0 0 24 24">
+     <path d="M10 4H5v16h5M14 8l5 4-5 4M19 12H9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.200">
+     </path>
+    </symbol>
+    <symbol id="i-alerttri" viewbox="0 0 24 24">
+     <path d="M12 3 2.500 20h19z" fill="currentColor">
+     </path>
+     <path d="M12 9.500v4.500m0 3v.1" stroke="#fff" stroke-linecap="round" stroke-width="2.400">
+     </path>
+    </symbol>
+    <symbol id="i-xcircle" viewbox="0 0 24 24">
+     <path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-linecap="round" stroke-width="2.800">
+     </path>
+    </symbol>
+    <symbol id="i-cart" viewbox="0 0 24 24">
+     <path d="M2 3h3l2.500 12h11l2-8H6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+     <circle cx="9" cy="19.500" fill="currentColor" r="1.500">
+     </circle>
+     <circle cx="17" cy="19.500" fill="currentColor" r="1.500">
+     </circle>
+    </symbol>
+    <symbol id="i-cube" viewbox="0 0 24 24">
+     <path d="m12 2 9 5v10l-9 5-9-5V7z" fill="currentColor">
+     </path>
+     <path d="m3 7 9 5 9-5M12 12v10" fill="none" opacity=".6" stroke="#fff" stroke-width="1.400">
+     </path>
+    </symbol>
+    <symbol id="i-cloudup" viewbox="0 0 24 24">
+     <path d="M6.500 19A4.500 4.500 0 0 1 6 10a6 6 0 0 1 11.600 1.500A3.800 3.800 0 0 1 17.500 19z" fill="currentColor">
+     </path>
+     <path d="M12 17v-6m-3 3 3-3 3 3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-doc" viewbox="0 0 24 24">
+     <path d="M6 2h8l5 5v15H6z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2">
+     </path>
+     <path d="M14 2v5h5M9 13h7m-7 4h7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+     </path>
+    </symbol>
+   </defs>
+  </svg>
+  <div id="auth">
+   <div class="auth-box">
+    <img alt="Seridoplast" class="auth-logo" id="authLogo"/>
+    <form autocomplete="on" id="loginForm" onsubmit="doLogin(event)" style="display:none">
+     <h2>
+      Entrar no sistema
+     </h2>
+     <p class="sub">
+      Almoxarifado Interno • CD Cruzeta
+     </p>
+     <div class="auth-err" id="loginErr">
+     </div>
+     <div class="field">
+      <label>
+       Login
+      </label>
+      <input autocomplete="username" autofocus="" id="au_login" required=""/>
+     </div>
+     <div class="field">
+      <label>
+       Senha
+      </label>
+      <input autocomplete="current-password" id="au_pass" required="" type="password"/>
+     </div>
+     <button class="btn primary">
+      Entrar
+     </button>
+    </form>
+    <form autocomplete="off" id="setupForm" onsubmit="doSetup(event)" style="display:none">
+     <h2>
+      Primeiro acesso
+     </h2>
+     <p class="sub">
+      Crie o administrador do sistema. Ele poderá cadastrar os demais usuários.
+     </p>
+     <div class="auth-err" id="setupErr">
+     </div>
+     <div class="field">
+      <label>
+       Nome completo
+      </label>
+      <input id="su_nome" required=""/>
+     </div>
+     <div class="field">
+      <label>
+       Login
+      </label>
+      <input autocomplete="username" id="su_login" required=""/>
+      <div class="hint">
+       Letras, números, ponto, hífen ou _ (mínimo 3).
+      </div>
+     </div>
+     <div class="field">
+      <label>
+       Senha
+      </label>
+      <input autocomplete="new-password" id="su_pass" required="" type="password"/>
+      <div class="hint">
+       Mínimo de 6 caracteres.
+      </div>
+     </div>
+     <div class="field">
+      <label>
+       Confirmar senha
+      </label>
+      <input autocomplete="new-password" id="su_pass2" required="" type="password"/>
+     </div>
+     <button class="btn primary">
+      Criar administrador e entrar
+     </button>
+    </form>
+    <div class="auth-foot">
+     SERIDOPLAST • Versão 6.7 Online
+    </div>
+   </div>
+  </div>
+  <div class="app">
+   <aside class="side">
+    <div class="brand">
+     <img alt="Seridoplast" src="assets/images/imagem_embutida_1.jpg"/>
+    </div>
+    <nav id="nav">
+     <button class="active" data-view="dashboard">
+      <svg class="ico">
+       <use href="#i-home">
+       </use>
+      </svg>
+      Painel
+     </button>
+     <button data-view="materiais">
+      <svg class="ico">
+       <use href="#i-box">
+       </use>
+      </svg>
+      Materiais
+     </button>
+     <button data-view="entradas">
+      <svg class="ico">
+       <use href="#i-down">
+       </use>
+      </svg>
+      Registrar Entrada
+     </button>
+     <button data-view="saidas">
+      <svg class="ico">
+       <use href="#i-up">
+       </use>
+      </svg>
+      Registrar Saída
+     </button>
+     <button data-view="devolucoes">
+      <svg class="ico">
+       <use href="#i-return">
+       </use>
+      </svg>
+      Devolução
+     </button>
+     <button data-view="estoque">
+      <svg class="ico">
+       <use href="#i-down">
+       </use>
+      </svg>
+      Estoque
+     </button>
+     <button data-view="movimentacoes">
+      <svg class="ico">
+       <use href="#i-list">
+       </use>
+      </svg>
+      Movimentações
+     </button>
+     <button data-view="inventario">
+      <svg class="ico">
+       <use href="#i-file">
+       </use>
+      </svg>
+      Inventário
+     </button>
+     <button data-view="relatorios">
+      <svg class="ico">
+       <use href="#i-chart">
+       </use>
+      </svg>
+      Relatórios
+     </button>
+     <button data-view="materiais">
+      <svg class="ico">
+       <use href="#i-users">
+       </use>
+      </svg>
+      Cadastros
+      <svg class="ico chev">
+       <use href="#i-chev">
+       </use>
+      </svg>
+     </button>
+     <button data-admin="" data-view="usuarios" style="display:none">
+      <svg class="ico">
+       <use href="#i-user">
+       </use>
+      </svg>
+      Usuários
+     </button>
+     <button data-view="config">
+      <svg class="ico">
+       <use href="#i-gear">
+       </use>
+      </svg>
+      Configurações
+     </button>
+    </nav>
+    <div class="side-foot">
+     <div class="cd">
+      <svg class="ico">
+       <use href="#i-box">
+       </use>
+      </svg>
+      <div>
+       <b>
+        CD CRUZETA
+       </b>
+       <small>
+        SERIDOPLAST
+       </small>
+      </div>
+     </div>
+     <button class="logout" onclick="logout()">
+      <svg class="ico">
+       <use href="#i-logout">
+       </use>
+      </svg>
+      Sair do sistema
+     </button>
+    </div>
+   </aside>
+   <main class="main">
+    <div class="topbar">
+     <button aria-label="Menu" class="burger" onclick="document.body.classList.toggle('side-collapsed')">
+      <svg class="ico">
+       <use href="#i-menu">
+       </use>
+      </svg>
+     </button>
+     <div class="ttl">
+      <b>
+       Almoxarifado Interno
+      </b>
+      <small>
+       SERIDOPLAST • CD CRUZETA
+      </small>
+     </div>
+     <div class="search">
+      <svg class="ico">
+       <use href="#i-search">
+       </use>
+      </svg>
+        <input
+            id="globalSearch"
+            placeholder="Buscar material (código, nome ou descrição)..."
+            onkeydown="if(event.key === 'Enter') {
+                go('materiais');
+                setTimeout(() => {
+                    let b = document.getElementById('busca');
+                    if (b) {
+                        b.value = this.value;
+                        renderMateriais();
+                        b.focus();
+                    }
+                }, 30);
+            }"
+        />
+      <kbd>
+       Ctrl + K
+      </kbd>
+     </div>
+     <div class="tb-r">
+      <span class="it">
+       <svg class="ico">
+        <use href="#i-calendar">
+        </use>
+       </svg>
+       <span id="spDate">
+       </span>
+      </span>
+      <span class="it">
+       <svg class="ico">
+        <use href="#i-clock">
+        </use>
+       </svg>
+       <span id="spClock">
+       </span>
+      </span>
+      <button aria-label="Alertas" class="bell" onclick="go('dashboard');document.getElementById('alertas').scrollIntoView({behavior:'smooth',block:'center'})">
+       <svg class="ico">
+        <use href="#i-bell">
+        </use>
+       </svg>
+       <i id="bellCount" style="display:none">
+        0
+       </i>
+      </button>
+      <div class="usr">
+       <span class="av">
+        <svg class="ico">
+         <use href="#i-user">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <b id="uName">
+         Usuário
+        </b>
+        <span id="uRole">
+        </span>
+       </div>
+       <svg class="ico" style="width:16px;height:16px">
+        <use href="#i-chevd">
+        </use>
+       </svg>
+      </div>
+     </div>
+    </div>
+    <div class="sp-banner" id="spHero">
+     <div class="sp-banner-content">
+      <div>
+       <h2>
+        Organização hoje,
+        <br/>
+        mais
+        <span>
+         eficiência
+        </span>
+        sempre.
+       </h2>
+       <p>
+        Controle de materiais de forma simples e segura.
+       </p>
+      </div>
+      <div class="brandmark">
+       <img alt="Seridoplast" src="assets/images/imagem_embutida_1.jpg"/>
+       <div class="slogan">
+        Acreditamos
+        <br/>
+        na
+        <span>
+         força
+        </span>
+        <br/>
+        do trabalho.
+       </div>
+      </div>
+     </div>
+    </div>
+    <section class="view active" id="dashboard">
+     <div class="kpis">
+      <div class="kpi k1">
+       <span class="kic">
+        <svg class="ico">
+         <use href="#i-box">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <span class="kl">
+         MATERIAIS CADASTRADOS
+        </span>
+        <b id="mMateriais">
+         0
+        </b>
+        <small>
+         Tipos de materiais
+        </small>
+       </div>
+       <svg class="ico deco">
+        <use href="#i-cube">
+        </use>
+       </svg>
+      </div>
+      <div class="kpi k2">
+       <span class="kic">
+        <svg class="ico">
+         <use href="#i-box">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <span class="kl">
+         UNIDADES EM ESTOQUE
+        </span>
+        <b id="mEstoque">
+         0
+        </b>
+        <small>
+         Total de unidades
+        </small>
+       </div>
+       <svg class="ico deco">
+        <use href="#i-chart">
+        </use>
+       </svg>
+      </div>
+      <div class="kpi k3">
+       <span class="kic">
+        <svg class="ico">
+         <use href="#i-alerttri">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <span class="kl">
+         ESTOQUE BAIXO
+        </span>
+        <b id="mBaixo">
+         0
+        </b>
+        <small>
+         Abaixo do mínimo
+        </small>
+       </div>
+       <svg class="ico deco">
+        <use href="#i-chart">
+        </use>
+       </svg>
+      </div>
+      <div class="kpi k4">
+       <span class="kic">
+        <svg class="ico">
+         <use href="#i-xcircle">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <span class="kl">
+         SEM ESTOQUE
+        </span>
+        <b id="mMov">
+         0
+        </b>
+        <small>
+         Itens zerados
+        </small>
+       </div>
+       <svg class="ico deco">
+        <use href="#i-cube">
+        </use>
+       </svg>
+      </div>
+     </div>
+     <div class="acts">
+      <button class="act a1" onclick="go('entradas')">
+       <span class="aic">
+        <svg class="ico">
+         <use href="#i-down">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <b>
+         REGISTRAR ENTRADA
+        </b>
+        <small>
+         Dar entrada em materiais
+        </small>
+       </div>
+       <svg class="ico">
+        <use href="#i-chev">
+        </use>
+       </svg>
+      </button>
+      <button class="act a2" onclick="go('saidas')">
+       <span class="aic">
+        <svg class="ico">
+         <use href="#i-up">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <b>
+         REGISTRAR SAÍDA
+        </b>
+        <small>
+         Retirada de materiais
+        </small>
+       </div>
+       <svg class="ico">
+        <use href="#i-chev">
+        </use>
+       </svg>
+      </button>
+      <button class="act a3" onclick="go('devolucoes')">
+       <span class="aic">
+        <svg class="ico">
+         <use href="#i-return">
+         </use>
+        </svg>
+       </span>
+       <div>
+        <b>
+         DEVOLUÇÃO
+        </b>
+        <small>
+         Entrada por devolução
+        </small>
+       </div>
+       <svg class="ico">
+        <use href="#i-chev">
+        </use>
+       </svg>
+      </button>
+     </div>
+     <div class="row2">
+      <div class="pn">
+       <div class="ph">
+        <svg class="ico">
+         <use href="#i-clock">
+         </use>
+        </svg>
+        <h3>
+         Últimas movimentações
+        </h3>
+        <button class="vt" onclick="go('movimentacoes')">
+         Ver todas
+        </button>
+       </div>
+       <div id="ultimas">
+       </div>
+      </div>
+      <div class="pn">
+       <div class="ph">
+        <svg class="ico">
+         <use href="#i-bell">
+         </use>
+        </svg>
+        <h3>
+         Alertas de estoque
+        </h3>
+        <button class="vt" onclick="go('materiais')">
+         Ver todas
+        </button>
+       </div>
+       <div id="alertas">
+       </div>
+      </div>
+     </div>
+     <div class="row3">
+      <div class="pn">
+       <div class="ph">
+        <svg class="ico">
+         <use href="#i-chart">
+         </use>
+        </svg>
+        <h3>
+         Materiais mais usados
+        </h3>
+        <button class="vt" onclick="go('relatorios')">
+         Ver relatório
+        </button>
+       </div>
+       <div id="spRanking">
+       </div>
+      </div>
+      <div class="pn">
+       <div class="ph">
+        <svg class="ico">
+         <use href="#i-pie">
+         </use>
+        </svg>
+        <h3>
+         Situação do estoque
+        </h3>
+        <button class="vt" onclick="go('estoque')">
+         Ver estoque
+        </button>
+       </div>
+       <div class="stk">
+        <div class="donut" id="spDonut">
+         <div>
+          <b id="spTotal">
+           0
+          </b>
+          <small>
+           Total
+          </small>
+         </div>
+        </div>
+        <div class="lg" id="spLegend">
+        </div>
+       </div>
+      </div>
+      <div class="pn">
+       <div class="ph">
+        <svg class="ico">
+         <use href="#i-bolt">
+         </use>
+        </svg>
+        <h3>
+         Acesso rápido
+        </h3>
+       </div>
+       <div class="qa">
+        <button onclick="go('estoque')">
+         <svg class="ico">
+          <use href="#i-cube">
+          </use>
+         </svg>
+         <span>
+          <b>
+           Estoque atual
+          </b>
+          <small>
+           Ver todos
+          </small>
+         </span>
+        </button>
+        <button onclick="go('relatorios')">
+         <svg class="ico">
+          <use href="#i-doc">
+          </use>
+         </svg>
+         <span>
+          <b>
+           Relatório de entradas
+          </b>
+          <small>
+           Gerar relatório
+          </small>
+         </span>
+        </button>
+        <button onclick="go('relatorios')">
+         <svg class="ico">
+          <use href="#i-doc">
+          </use>
+         </svg>
+         <span>
+          <b>
+           Relatório de saídas
+          </b>
+          <small>
+           Gerar relatório
+          </small>
+         </span>
+        </button>
+        <button onclick="exportar()">
+         <svg class="ico">
+          <use href="#i-cloudup">
+          </use>
+         </svg>
+         <span>
+          <b>
+           Fazer backup
+          </b>
+          <small>
+           Exportar dados
+          </small>
+         </span>
+        </button>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="view" id="materiais">
+     <div class="top">
+      <div>
+       <h1>
+        Materiais
+       </h1>
+       <div class="sub">
+        Cadastro e posição atual do estoque
+       </div>
+      </div>
+     </div>
+     <div class="panel">
+      <div class="toolbar">
+       <input id="busca" oninput="renderMateriais()" placeholder="Pesquisar código ou descrição..."/>
+       <button class="btn primary" onclick="openMaterial()">
+        + Cadastrar
+       </button>
+      </div>
+      <div id="tblMateriais">
+      </div>
+     </div>
+    </section>
+    <section class="view" id="entradas">
+     <div class="top">
+      <div>
+       <h1>
+        Entrada de Material
+       </h1>
+       <div class="sub">
+        Registre tudo que entrar no almoxarifado
+       </div>
+      </div>
+     </div>
+     <div class="panel" id="entradaForm">
+     </div>
+    </section>
+    <section class="view" id="saidas">
+     <div class="top">
+      <div>
+       <h1>
+        Saída de Material
+       </h1>
+       <div class="sub">
+        Registre quem recebeu e para qual setor
+       </div>
+      </div>
+     </div>
+     <div class="panel" id="saidaForm">
+     </div>
+    </section>
+    <section class="view" id="devolucoes">
+     <div class="top">
+      <div>
+       <h1>
+        Devolução de Material
+       </h1>
+       <div class="sub">
+        Registre materiais que retornaram ao almoxarifado
+       </div>
+      </div>
+     </div>
+     <div class="panel" id="devolucaoForm">
+     </div>
+    </section>
+    <section class="view" id="estoque">
+     <div class="top">
+      <div>
+       <h1>
+        Estoque
+       </h1>
+       <div class="sub">
+        Posição atual de todos os materiais
+       </div>
+      </div>
+     </div>
+     <div class="panel">
+      <div id="tblEstoque">
+      </div>
+     </div>
+    </section>
+    <section class="view" id="movimentacoes">
+     <div class="top">
+      <div>
+       <h1>
+        Movimentações
+       </h1>
+       <div class="sub">
+        Histórico completo de entradas, saídas e ajustes
+       </div>
+      </div>
+     </div>
+     <div class="panel">
+      <div id="tblMov">
+      </div>
+     </div>
+    </section>
+    <section class="view" id="inventario">
+     <div class="top">
+      <div>
+       <h1>
+        Inventário
+       </h1>
+       <div class="sub">
+        Compare o saldo do sistema com a quantidade física
+       </div>
+      </div>
+     </div>
+     <div class="panel">
+      <div class="notice">
+       Informe a quantidade física. Se houver diferença, o sistema registra um ajuste no histórico.
+      </div>
+      <br/>
+      <div id="tblInv">
+      </div>
+     </div>
+    </section>
+    <section class="view" id="relatorios">
+     <div class="top">
+      <div>
+       <h1>
+        Relatórios
+       </h1>
+       <div class="sub">
+        Resumo para acompanhamento do almoxarifado
+       </div>
+      </div>
+     </div>
+     <div class="cards">
+      <div class="card">
+       <div class="label">
+        ENTRADAS ACUMULADAS
+       </div>
+       <div class="metric" id="rEnt">
+        0
+       </div>
+      </div>
+      <div class="card">
+       <div class="label">
+        SAÍDAS ACUMULADAS
+       </div>
+       <div class="metric" id="rSai">
+        0
+       </div>
+      </div>
+      <div class="card">
+       <div class="label">
+        ITENS SEM ESTOQUE
+       </div>
+       <div class="metric" id="rZero">
+        0
+       </div>
+      </div>
+      <div class="card">
+       <div class="label">
+        ITENS ABAIXO DO MÍNIMO
+       </div>
+       <div class="metric" id="rLow">
+        0
+       </div>
+      </div>
+     </div>
+     <div class="panel" style="margin-top:14px">
+      <h3>
+       Consumo por setor
+      </h3>
+      <div id="setores">
+      </div>
+     </div>
+    </section>
+    <section class="view" id="usuarios">
+     <div class="top">
+      <div>
+       <h1>
+        Usuários
+       </h1>
+       <div class="sub">
+        Quem pode entrar no sistema com login e senha
+       </div>
+      </div>
+      <div>
+       <button class="btn primary" id="btnNewUser" onclick="openUser()">
+        + Novo usuário
+       </button>
+      </div>
+     </div>
+     <div class="panel">
+      <div id="tblUsers">
+      </div>
+      <div class="notice" style="margin-top:14px">
+       <b>
+        Administrador
+       </b>
+       cadastra usuários e acessa todas as telas.
+       <b>
+        Operador
+       </b>
+       usa o almoxarifado, mas não gerencia usuários.
+      </div>
+     </div>
+    </section>
+    <section class="view" id="config">
+     <div class="top">
+      <div>
+       <h1>
+        Backup
+       </h1>
+       <div class="sub">
+        Proteja os dados desta versão local
+       </div>
+      </div>
+     </div>
+     <div class="panel">
+      <p>
+       Os dados ficam salvos neste navegador. Faça backups regularmente.
+      </p>
+      <button class="btn primary" onclick="exportar()">
+       Exportar backup
+      </button>
+      <label class="btn secondary" style="display:inline-block">
+       Importar backup
+       <input accept=".json" onchange="importar(this)" style="display:none" type="file"/>
+      </label>
+      <button class="btn danger" onclick="limpar()">
+       Apagar dados
+      </button>
+     </div>
+    </section>
+    <div class="foot">
+     <span>
+      SERIDOPLAST - Almoxarifado Interno | CD Cruzeta
+     </span>
+     <span>
+      Versão 6.7
+     </span>
+    </div>
+   </main>
+  </div>
+  <div class="modal" id="modal">
+   <div class="modalbox">
+    <div class="modalhead">
+     <h2 id="modalTitle">
+      Novo material
+     </h2>
+     <button class="close" onclick="closeModal()">
+      ×
+     </button>
+    </div>
+    <form class="formgrid" id="materialForm">
+     <input id="editId" type="hidden"/>
+     <div class="field">
+      <label>
+       Código *
+      </label>
+      <input id="codigo" required=""/>
+     </div>
+     <div class="field">
+      <label>
+       Descrição *
+      </label>
+      <input id="descricao" required=""/>
+     </div>
+     <div class="field">
+      <label>
+       Categoria
+      </label>
+      <input id="categoria"/>
+     </div>
+     <div class="field">
+      <label>
+       Unidade
+      </label>
+      <select id="unidade">
+       <option>
+        UN
+       </option>
+       <option>
+        CX
+       </option>
+       <option>
+        KG
+       </option>
+       <option>
+        LT
+       </option>
+       <option>
+        MT
+       </option>
+       <option>
+        PCT
+       </option>
+      </select>
+     </div>
+     <div class="field">
+      <label>
+       Localização
+      </label>
+      <input id="localizacao" placeholder="Ex.: Prateleira A2"/>
+     </div>
+     <div class="field">
+      <label>
+       Estoque mínimo
+      </label>
+      <input id="minimo" min="0" type="number" value="0"/>
+     </div>
+     <div class="field wide">
+      <label>
+       Observações
+      </label>
+      <textarea id="obs"></textarea>
+     </div>
+     <div class="wide">
+      <button class="btn primary" type="submit">
+       Salvar material
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <div class="modal" id="userModal">
+   <div class="modalbox" style="width:min(560px,100%)">
+    <div class="modalhead">
+     <h2 id="umTitle">
+      Novo usuário
+     </h2>
+     <button class="close" onclick="closeUser()" type="button">
+      ×
+     </button>
+    </div>
+    <form autocomplete="off" class="um-grid" id="umForm">
+     <input id="um_id" type="hidden"/>
+     <div class="um-err wide" id="umErr">
+     </div>
+     <div class="field wide">
+      <label>
+       Nome completo *
+      </label>
+      <input id="um_nome" required=""/>
+     </div>
+     <div class="field">
+      <label>
+       Login *
+      </label>
+      <input autocomplete="off" id="um_login" required=""/>
+     </div>
+     <div class="field">
+      <label>
+       Perfil *
+      </label>
+      <select id="um_perfil">
+       <option value="OPERADOR">
+        Operador
+       </option>
+       <option value="ADMIN">
+        Administrador
+       </option>
+      </select>
+     </div>
+     <div class="field">
+      <label id="umPwLabel">
+       Senha *
+      </label>
+      <input autocomplete="new-password" id="um_pw" type="password"/>
+     </div>
+     <div class="field">
+      <label>
+       Confirmar senha
+      </label>
+      <input autocomplete="new-password" id="um_pw2" type="password"/>
+     </div>
+     <div class="wide hint" id="umPwHint">
+      Mínimo de 6 caracteres.
+     </div>
+     <div class="wide">
+      <button class="btn primary" type="submit">
+       Salvar usuário
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="js/app.js">
+  </script>
+ </body>
+</html>
+
